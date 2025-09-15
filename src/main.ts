@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.route";
 import bookRoutes from "./routes/book.route";
 import cors from "cors";
 import { connectDB } from "./configs/db.config";
+import job from "./libs/cron.lib";
 
 //Config
 dotenv.config();
@@ -25,4 +26,5 @@ app.use(`/api/${process.env.API_VERSION||"v1"}/book`, bookRoutes);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     connectDB();
+    job.start();
 });

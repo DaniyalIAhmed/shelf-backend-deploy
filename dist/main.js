@@ -9,6 +9,7 @@ const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const book_route_1 = __importDefault(require("./routes/book.route"));
 const cors_1 = __importDefault(require("cors"));
 const db_config_1 = require("./configs/db.config");
+const cron_lib_1 = __importDefault(require("./libs/cron.lib"));
 //Config
 dotenv_1.default.config();
 //Constants
@@ -25,5 +26,6 @@ app.use(`/api/${process.env.API_VERSION || "v1"}/book`, book_route_1.default);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
     (0, db_config_1.connectDB)();
+    cron_lib_1.default.start();
 });
 //# sourceMappingURL=main.js.map
